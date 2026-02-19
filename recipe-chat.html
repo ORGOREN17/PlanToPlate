@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PlanToPlate – Meal Planner</title>
+
+  <link rel="stylesheet" href="./css/style.css"/>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script defer src="./js/meal-plan.js"></script>
+
+  <style>
+    .is-invalid { outline: 2px solid #e53935; outline-offset: 2px; }
+    .field-error { display:block; min-height:16px; margin-top:6px; color:#e53935; font-size:0.9rem; }
+
+    /* Modal */
+    #successModal { display:none; position:fixed; inset:0; z-index:999999; }
+    #successModal.is-open { display:block !important; }
+    #successModal .modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.55); }
+
+    #successModal .modal-card {
+      position:relative;
+      width:min(420px, calc(100% - 32px));
+      margin:18vh auto 0;
+      background:#fff;
+      border-radius:14px;
+      padding:22px 20px 16px;
+      box-shadow:0 18px 55px rgba(0,0,0,0.35);
+      text-align:center;
+    }
+
+    #successModal .modal-icon {
+      width:56px; height:56px;
+      border-radius:999px;
+      margin:-48px auto 10px;
+      background:#31c16b;
+      display:grid; place-items:center;
+      box-shadow:0 10px 25px rgba(49,193,107,0.35);
+      border:6px solid #fff;
+    }
+
+    #successModal .modal-icon svg { width:28px; height:28px; }
+    #successModal .modal-title { margin:6px 0 6px; font-size:1.25rem; }
+    #successModal .modal-text { margin:0 0 14px; opacity:0.85; font-size:0.95rem; }
+
+    #successModal .modal-actions { display:flex; justify-content:center; }
+    #successModal .modal-ok {
+      width:100%;
+      max-width:220px;
+      padding:10px 14px;
+      border:0;
+      border-radius:10px;
+      cursor:pointer;
+      background:#31c16b;
+      color:#fff;
+      font-weight:700;
+    }
+    #successModal .modal-ok:hover { filter:brightness(0.95); }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a href="index.html">
+    <img src="images/PlanToPlateLogo.png" alt="PlanToPlate">
+  </a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="includes/recipes.php">Recipes</a>
+    <a href="recipe-chat.html">Recipe Chat</a>
+    <a class="active" href="meal-plan.html">Meal Planner</a>
+    <a href="includes/favorites.php">Favorites</a>
+    <a href="tips.html">Tips</a>
+  </nav>
+</header>
+
+<main class="page-wrap">
+  <h1 id="pageHeader">Meal Planner</h1>
+
+  <section class="meal-plan-wrapper">
+    <header class="meal-plan-header">
+      <h2>Create a Weekly Meal Plan</h2>
+      <p class="subtitle">Plan your meals ahead. This form saves your plan into the database.</p>
+    </header>
+
+    <form id="planForm" method="POST" action="./includes/save_plan.php" novalidate>
+      <div class="meal-form-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="form-card">
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="full_name" type="text" placeholder="John Doe" />
+            <span class="hint">At least 3 letters, letters only</span>
+            <small class="field-error" id="errFullName"></small>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="example@mail.com" />
+            <small class="field-error" id="errEmail"></small>
+          </div>
+
+          <div class="field">
+            <label for="weekStart">Week start date</label>
+            <input id="weekStart" name="week_start" type="date" />
+            <small class="field-error" id="errWeekStart"></small>
+          </div>
+
+          <div class="field">
+            <label for="mealsCount">Meals per week</label>
+            <input id="mealsCount" name="meals_count" type="number" min="1" max="21" />
+            <small class="field-error" id="errMealsCount"></small>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="form-card">
+          <div class="field">
+            <label for="diet">Diet preference</label>
+            <select id="diet" name="diet">
+              <option value="none">None</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="glutenfree">Gluten-free</option>
+              <option value="vegan">Vegan</option>
+              <option value="lowcarb">Low-carb</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" rows="6" placeholder="Preferences, allergies, etc."></textarea>
+            <span class="hint">Max 200 characters</span>
+            <small class="field-error" id="errNotes"></small>
+          </div>
+
+          <div class="actions-row">
+            <button class="btn" type="submit" id="saveBtn">Save Plan</button>
+            <button class="btn btn-secondary" id="fillDemo" type="button">Fill Demo</button>
+          </div>
+
+          <!-- Page-level errors appear here -->
+          <div id="formMsg" class="message" style="display:none;"></div>
+        </div>
+
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>From your fridge to your plate.</p>
+</footer>
+
+<!-- ✅ Success popup -->
+<div id="successModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close="true"></div>
+
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="modal-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M20 7L10 17l-5-5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h3 class="modal-title" id="successTitle">Thank you!</h3>
+    <p class="modal-text" id="successText">Meal plan saved successfully ✅</p>
+
+    <div class="modal-actions">
+      <button class="modal-ok" id="successOkBtn" type="button">OK</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

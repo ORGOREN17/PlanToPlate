@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Recipe Chat – PlanToPlate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script defer src="js/recipe-chat.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a href="index.html">
+    <img src="images/PlanToPlateLogo.png" alt="PlanToPlate">
+  </a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="includes/recipes.php">Recipes</a>
+    <a class="active" href="recipe-chat.html">Recipe Chat</a>
+    <a href="meal-plan.html">Meal Planner</a>
+    <a href="includes/favorites.php">Favorites</a>
+    <a href="tips.html">Tips</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <h1>Recipe Chat</h1>
+
+  <section class="chat-box">
+    <div>
+      <h2>How it works</h2>
+      <ul>
+        <li>Enter ingredients you already have</li>
+        <li>Select dietary + time + skill preferences</li>
+        <li>Generate a step-by-step custom recipe</li>
+        <li>Copy it, regenerate, or tweak inputs</li>
+      </ul>
+    </div>
+
+    <!-- Now it does something -->
+    <button class="btn" id="suggestionsBtn" type="button">Suggestions</button>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h3>Ingredients</h3>
+      <p>What’s in your fridge or pantry?</p>
+      <input id="ingredientsInput" type="text" placeholder="chicken, rice, garlic" autocomplete="off">
+      <small class="hint">Comma-separated. Example: pasta, mushrooms, cream</small>
+    </div>
+
+    <div class="feature-card">
+      <h3>Preferences</h3>
+      <p>Adjust recipes to your needs.</p>
+
+      <label class="small-label">Diet</label>
+      <select id="preferenceSelect">
+        <option value="any">Any</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="vegan">Vegan</option>
+        <option value="lowcarb">Low-Carb</option>
+      </select>
+
+      <label class="small-label">Max time</label>
+      <select id="timeSelect">
+        <option value="10">10 min</option>
+        <option value="20" selected>20 min</option>
+        <option value="30">30 min</option>
+        <option value="45">45 min</option>
+        <option value="60">60 min</option>
+      </select>
+
+      <label class="small-label">Skill</label>
+      <select id="skillSelect">
+        <option value="easy" selected>Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+
+    <div class="feature-card">
+      <h3>Generate</h3>
+      <p>Create a personalized recipe.</p>
+      <button class="btn" id="generateBtn" type="button">Generate Recipe</button>
+      <button class="btn secondary" id="regenBtn" type="button" disabled>Regenerate</button>
+    </div>
+  </section>
+
+  <!-- Output -->
+  <section class="conversation-box" id="resultBox">
+    <h2>Your generated recipe</h2>
+    <p class="hint" id="emptyHint">Fill ingredients and click “Generate Recipe”.</p>
+
+    <div class="recipe-output" id="recipeOutput" hidden>
+      <div class="recipe-output-header">
+        <div>
+          <h3 id="recipeTitle"></h3>
+          <p class="meta" id="recipeMeta"></p>
+        </div>
+
+        <div class="recipe-actions">
+          <button class="btn secondary" id="copyBtn" type="button">Copy</button>
+          <button class="btn secondary" id="clearOutBtn" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="recipe-columns">
+        <div class="recipe-col">
+          <h4>Ingredients</h4>
+          <ul id="recipeIngredients"></ul>
+        </div>
+
+        <div class="recipe-col">
+          <h4>Instructions</h4>
+          <ol id="recipeSteps"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  From your fridge to your plate.
+</footer>
+
+<div id="toast" class="message" aria-live="polite"></div>
+
+</body>
+</html>
