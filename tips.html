@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PlanToPlate – Tips & Conversions</title>
+
+  <link rel="stylesheet" href="./css/style.css"/>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script defer src="./js/tips.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a href="index.html">
+    <img src="images/PlanToPlateLogo.png" alt="PlanToPlate Logo">
+  </a>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="includes/recipes.php">Recipes</a>
+    <a href="recipe-chat.html">Recipe Chat</a>
+    <a href="meal-plan.html">Meal Planner</a>
+    <a href="includes/favorites.php">Favorites</a>
+    <a class="active" href="tips.html">Tips</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img src="images/ty.png" alt="Kitchen Tips">
+</section>
+
+<main class="page">
+
+  <h1>Tips & Conversions</h1>
+
+  <!-- Tips -->
+  <section>
+    <h2>Smart Cooking Tips</h2>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <h3>Season Gradually</h3>
+        <p>Add seasoning slowly and taste often.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>Rest Your Meat</h3>
+        <p>Resting improves juiciness and texture.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>Fresh Herbs Last</h3>
+        <p>Add delicate herbs near the end to preserve aroma and color.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>Sharp Knives</h3>
+        <p>Safer, faster, and more precise cutting.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>Prep Before Cooking</h3>
+        <p>Measure and cut everything first (mise en place).</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>Clean as You Go</h3>
+        <p>Less mess, more focus.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>Control Heat</h3>
+        <p>Medium heat gives better control and prevents burning.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>Taste as You Cook</h3>
+        <p>Adjust salt, acid, and spices little by little.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversion table -->
+  <section class="conversion-section">
+    <h2>Ingredient Conversion Guide</h2>
+
+    <div class="conversion-toolbar">
+      <div class="unit-toggle" role="tablist" aria-label="Unit switch">
+        <button id="metricBtn" type="button" class="active" aria-pressed="true">
+          Metric
+        </button>
+        <button id="usBtn" type="button" aria-pressed="false">
+          US Cups
+        </button>
+      </div>
+
+      <div class="conversion-note">
+        <small>Approximate equivalents (common kitchen standards).</small>
+      </div>
+    </div>
+
+    <table class="conversion-table">
+      <thead>
+        <tr>
+          <th>Ingredient</th>
+          <th id="col1">Grams</th>
+          <th id="col2">Milliliters</th>
+        </tr>
+      </thead>
+      <tbody id="conversionBody"></tbody>
+    </table>
+  </section>
+
+  <section class="conversation-box">
+    <h2>Kitchen Conversations</h2>
+    <p>
+      Cooking improves when knowledge is shared. Learn substitutions, shortcuts,
+      and techniques that make everyday cooking easier and more enjoyable.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  From your fridge to your plate.
+</footer>
+
+</body>
+</html>
